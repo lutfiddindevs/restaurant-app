@@ -131,4 +131,14 @@ class FoodController extends Controller
         session()->flash('d_message', 'Food has been deleted successfully');
         return redirect('/food');
     }
+
+    public function listFood() {
+        $categories = Category::with('food')->get();
+        return view('index', compact('categories')); 
+    }
+
+    public function view($id) {
+        $food = Food::find($id);
+        return view('food.detail', compact('food'));
+    }
 }
